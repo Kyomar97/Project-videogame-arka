@@ -32,9 +32,12 @@ const levels = [
   // Level 1: Rectángulo
   {
     layout: [
-      [1, 1, 1, 1, 1],
-      [1, 1, 1, 1, 1],
-      [1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1],
     ],
     brickStrength: 1,
   },
@@ -173,7 +176,9 @@ function collisionDetection() {
             brick.status = 0;
             score++;
           }
-          if (score === calculateTotalBricks()) {
+
+          // Verificar si quedan ladrillos activos
+          if (bricks.flat().filter((b) => b.status === 1).length === 0) {
             level++;
             if (level < levels.length) {
               startNextLevel();

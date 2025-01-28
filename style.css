@@ -1,0 +1,41 @@
+body {
+  margin: 0;
+  overflow: hidden;
+  background-image: url(img/bricks.png);
+  background-color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+canvas {
+  display: block;
+  background: #222;
+  border: 2px solid #fff;
+}
+
+.screen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+.screen button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #0095dd;
+  border: none;
+  border-radius: 5px;
+  color: white;
+}

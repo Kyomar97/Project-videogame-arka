@@ -3,10 +3,10 @@ const ctx = canvas.getContext("2d");
 
 // Tamaño Canvas
 canvas.width = 800;
-canvas.height = 600;
+canvas.height = 550;
 
-// VAriables del juego
-const paddleWidth = 100;
+// Variables del juego
+const paddleWidth = 120;
 const paddleHeight = 10;
 const paddleSpeed = 8;
 const ballRadius = 8;
@@ -14,6 +14,7 @@ const brickWidth = 75;
 const brickHeight = 20;
 const brickPadding = 10;
 const brickOffsetTop = 30;
+const soundGame = new Audio("start-sound.mp3");
 
 let paddleX = (canvas.width - paddleWidth) / 2;
 let ballX = canvas.width / 2;
@@ -38,6 +39,7 @@ const levels = [
       [1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1],
     ],
     brickStrength: 1,
   },
@@ -46,6 +48,8 @@ const levels = [
     layout: [
       [0, 0, 1, 0, 0],
       [0, 1, 1, 1, 0],
+      [1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1],
       [1, 1, 1, 1, 1],
     ],
     brickStrength: 2,
@@ -56,6 +60,8 @@ const levels = [
       [1, 0, 1, 0, 1],
       [0, 1, 0, 1, 0],
       [1, 0, 1, 0, 1],
+      [0, 1, 0, 1, 0],
+      [1, 0, 1, 1, 1],
       [0, 1, 0, 1, 0],
     ],
     brickStrength: 2,
@@ -129,7 +135,7 @@ function drawBricks() {
     for (let r = 0; r < bricks[c].length; r++) {
       const brick = bricks[c][r];
       if (brick.status === 1) {
-        ctx.fillStyle = `rgba(255, 215, 0, ${
+        ctx.fillStyle = `rgba(135, 255, 0, ${
           brick.strength / levels[level].brickStrength
         })`;
         ctx.fillRect(brick.x, brick.y, brickWidth, brickHeight);
@@ -140,10 +146,10 @@ function drawBricks() {
 
 // Pala (meter sprite)
 function drawPaddle() {
-  ctx.fillStyle = "#0095DD";
+  ctx.fillStyle = "#00ffb7";
   ctx.fillRect(
     paddleX,
-    canvas.height - paddleHeight - 10,
+    canvas.height - paddleHeight,
     paddleWidth,
     paddleHeight
   );
@@ -153,7 +159,7 @@ function drawPaddle() {
 function drawBall() {
   ctx.beginPath();
   ctx.arc(ballX, ballY, ballRadius, 0, Math.PI * 2);
-  ctx.fillStyle = "#FF4500";
+  ctx.fillStyle = "#FF13F0";
   ctx.fill();
   ctx.closePath();
 }
@@ -266,6 +272,7 @@ function startGame() {
   document.getElementById("startScreen").style.display = "none";
   document.getElementById("gameOverScreen").style.display = "none";
   canvas.style.display = "block";
+  soundGame.play();
   startNextLevel();
   draw();
 }

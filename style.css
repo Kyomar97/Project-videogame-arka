@@ -38,6 +38,7 @@ canvas {
   border: 10px;
   border-radius: 5px;
   color: white;
+  margin-left: 25px;
 }
 
 .screen-image-intro {

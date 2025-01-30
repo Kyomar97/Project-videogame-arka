@@ -14,7 +14,28 @@ const brickWidth = 75;
 const brickHeight = 20;
 const brickPadding = 10;
 const brickOffsetTop = 30;
-const soundGame = new Audio("start-sound.mp3");
+
+// Sonidos
+const backgroundMusic = new Audio("sounds/start-sound.mp3");
+backgroundMusic.loop = true;
+backgroundMusic.volume = 0.5;
+
+const paddleSound = new Audio("sounds/sonido-paddle.mp3");
+function playPaddleSound() {
+  paddleSound.currentTime = 0;
+  paddleSound.play();
+}
+
+const brickSound = new Audio("sounds/sonido-ladrillo.mp3");
+function playBrickSound() {
+  brickSound.currentTime = 0;
+  brickSound.play();
+}
+const gameOverSound = new Audio("sounds/end-credits.mp3");
+function lostGameSound() {
+  gameOverSound.currentTime = 0;
+  gameOverSound.play();
+}
 
 let paddleX = (canvas.width - paddleWidth) / 2;
 let ballX = canvas.width / 2;
@@ -181,6 +202,7 @@ function collisionDetection() {
           if (brick.strength <= 0) {
             brick.status = 0;
             score++;
+            playBrickSound();
           }
 
           // Verificar si quedan ladrillos activos
@@ -238,6 +260,7 @@ function draw() {
   } else if (ballY + ballDY > canvas.height - ballRadius) {
     if (ballX > paddleX && ballX < paddleX + paddleWidth) {
       ballDY = -ballDY;
+      playPaddleSound();
     } else {
       endGame();
       return;
@@ -272,7 +295,7 @@ function startGame() {
   document.getElementById("startScreen").style.display = "none";
   document.getElementById("gameOverScreen").style.display = "none";
   canvas.style.display = "block";
-  soundGame.play();
+  backgroundMusic.play();
   startNextLevel();
   draw();
 }
@@ -283,6 +306,9 @@ function endGame() {
   canvas.style.display = "none";
   document.getElementById("gameOverScreen").style.display = "flex";
   document.getElementById("finalScore").textContent = `Final Score: ${score}`;
+  backgroundMusic.pause();
+  backgroundMusic.currentTime = 0;
+  gameOverSound.play();
 }
 
 // Event listeners: botones de start y play again

@@ -34,8 +34,20 @@ canvas {
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
-  background-color: #0095dd;
-  border: none;
+  background-color: #dd05f1;
+  border: 10px;
   border-radius: 5px;
   color: white;
+}
+
+.screen-image-intro {
+  width: 35%;
+  margin-bottom: 20px;
+  height: 45%;
+}
+
+.screen-image-over {
+  width: 50%;
+  margin-bottom: 20px;
+  height: 50%;
 }
